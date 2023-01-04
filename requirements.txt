@@ -1,0 +1,10 @@
+pandas
+PyYAML
+numpy
+scikit-learn
+tqdm
+torch
+torchaudio
+torchvision
+argparse
+dvc

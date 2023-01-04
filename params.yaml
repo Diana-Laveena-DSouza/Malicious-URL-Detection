@@ -1,0 +1,13 @@
+# This contains params to be used by the stages to train or predict
+Config:
+  TRAIN_BATCH_SIZE: 32
+  VAL_BATCH_SIZE: 8
+  EPOCHS: 5
+
+train_test_split:
+  test_size: 0.01
+  random_state: 10
+  
+model_params:
+  optimizer:
+    lr: 1e-4

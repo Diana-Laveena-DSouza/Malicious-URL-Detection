@@ -1,0 +1,100 @@
+schema: '2.0'
+stages:
+  get_data:
+    cmd: python scripts/step_01_collect_data.py
+    deps:
+    - path: configs/config.yaml
+      md5: 8522ad6f5ba7969bbe094229badbd829
+      size: 551
+    - path: scripts/step_01_collect_data.py
+      md5: da1f9fac24c6d3929b932be65eb31c2d
+      size: 1596
+    - path: scripts/utils/common.py
+      md5: f7aeb87182d37200ce0c7b2d7e95ab22
+      size: 679
+    outs:
+    - path: artifacts/data_dir/data.csv
+      md5: 9101d380a936d27fe48a9bb6aafe8205
+      size: 46168105
+  train_test_split:
+    cmd: python scripts/step_02_train_test_split.py
+    deps:
+    - path: artifacts/data_dir/data.csv
+      md5: 9101d380a936d27fe48a9bb6aafe8205
+      size: 46168105
+    - path: configs/config.yaml
+      md5: 8522ad6f5ba7969bbe094229badbd829
+      size: 551
+    - path: scripts/step_02_train_test_split.py
+      md5: 41cb8bd60e816de8643a3afa04427794
+      size: 2695
+    - path: scripts/utils/common.py
+      md5: f7aeb87182d37200ce0c7b2d7e95ab22
+      size: 679
+    params:
+      params.yaml:
+        train_test_split.random_state: 10
+        train_test_split.test_size: 0.01
+    outs:
+    - path: artifacts/split_data_dir/test.csv
+      md5: 6aefd3fca06ecd546e1fc0c37708f485
+      size: 357785
+    - path: artifacts/split_data_dir/train.csv
+      md5: a11eb9baa7ad62d8d9ab9d9c1458b5bb
+      size: 36144206
+  process_data:
+    cmd: python scripts/step_03_processed_data.py
+    deps:
+    - path: artifacts/split_data_dir/test.csv
+      md5: 6aefd3fca06ecd546e1fc0c37708f485
+      size: 357785
+    - path: artifacts/split_data_dir/train.csv
+      md5: a11eb9baa7ad62d8d9ab9d9c1458b5bb
+      size: 36144206
+    - path: configs/config.yaml
+      md5: 8522ad6f5ba7969bbe094229badbd829
+      size: 551
+    - path: scripts/step_03_processed_data.py
+      md5: 552fcd359af535b8e268afdec19c2b28
+      size: 5029
+    - path: scripts/utils/common.py
+      md5: f7aeb87182d37200ce0c7b2d7e95ab22
+      size: 679
+    outs:
+    - path: artifacts/process_local_dir/test_new.csv
+      md5: 95598dd0504331065fb7bb75003165f4
+      size: 3341169
+    - path: artifacts/process_local_dir/train_new.csv
+      md5: 9ea97d7c616adc796a830148960b039c
+      size: 330626419
+  train_and_evaluate:
+    cmd: python scripts/step_04_train_evaluate_model.py
+    deps:
+    - path: artifacts/process_local_dir/test_new.csv
+      md5: 95598dd0504331065fb7bb75003165f4
+      size: 3341169
+    - path: artifacts/process_local_dir/train_new.csv
+      md5: 9ea97d7c616adc796a830148960b039c
+      size: 330626419
+    - path: params.yaml
+      md5: 6dd75824e1f7fafc8fb8baa89a151201
+      size: 241
+    - path: scripts/step_04_train_evaluate_model.py
+      md5: 35b981c5519d8b13643cdbf4c444c1b6
+      size: 5672
+    - path: scripts/utils/common.py
+      md5: f7aeb87182d37200ce0c7b2d7e95ab22
+      size: 679
+    params:
+      params.yaml:
+        Config.EPOCHS: 5
+        Config.TRAIN_BATCH_SIZE: 32
+        Config.VAL_BATCH_SIZE: 8
+        model_params.optimizer.lr: 0.0001
+    outs:
+    - path: artifacts/model_dir/model.bin
+      md5: b0cdaee9977ce382ae6c22c1a226cc24
+      size: 8471333
+    - path: scores.json
+      md5: 1e2c68ff9800e42db8b4e9e9680a192a
+      size: 147

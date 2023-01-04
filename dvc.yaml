@@ -1,0 +1,60 @@
+# add stages here 
+stages:
+
+  get_data:
+    cmd: python scripts/step_01_collect_data.py
+    deps:
+    - scripts/step_01_collect_data.py
+    - scripts/utils/common.py
+    - configs/config.yaml
+    outs:
+    - artifacts/data_dir/data.csv
+
+
+  train_test_split:
+    cmd: python scripts/step_02_train_test_split.py
+    deps:
+    - scripts/step_02_train_test_split.py
+    - scripts/utils/common.py
+    - artifacts/data_dir/data.csv
+    - configs/config.yaml
+    params:
+      - train_test_split.test_size
+      - train_test_split.random_state
+    outs:
+    - artifacts/split_data_dir/train.csv
+    - artifacts/split_data_dir/test.csv
+
+
+  process_data:
+    cmd: python scripts/step_03_processed_data.py
+    deps:
+    - scripts/step_03_processed_data.py
+    - scripts/utils/common.py
+    - artifacts/split_data_dir/train.csv
+    - artifacts/split_data_dir/test.csv
+    - configs/config.yaml
+    outs:
+    - artifacts/process_local_dir/train_new.csv
+    - artifacts/process_local_dir/test_new.csv
+
+  
+
+  train_and_evaluate:
+    cmd:  python scripts/step_04_train_evaluate_model.py
+    deps:
+    - scripts/step_04_train_evaluate_model.py
+    - scripts/utils/common.py
+    - artifacts/process_local_dir/train_new.csv
+    - artifacts/process_local_dir/test_new.csv
+    - params.yaml
+    params:
+      - Config.EPOCHS
+      - model_params.optimizer.lr
+      - Config.TRAIN_BATCH_SIZE
+      - Config.VAL_BATCH_SIZE
+    outs:
+    - artifacts/model_dir/model.bin
+    metrics:
+      - scores.json:
+          cache: false

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malicious URL Detection</title>
+    <br/><br/><br/><br/>
+    <h1 align="center"><img src="static/ineuron.jpg"/></h1>
+    <h1 align="center" style="color: rgb(255, 81, 0);">Malicious URL Detection</h1>
+</head>
+<body>
+    <br/><br/><br/><br/>
+    <div class="login" align="center">
+        <br/><br/><br/><br/><br/><br/>
+        <form action="{{ url_for('predict')}}" method="post">
+             <input type="text" id="url" name='url' value="Enter the URL" size="100" required="required"/>
+             <br/><br/><br/><br/>
+             <p><button type="submit">Submit</button></p>
+        </form>
+        <br/><br/>
+        <p style="color: black; font-size: larger;"><b><label style="color: red;">URL: </label> {{post_text}}</b></p>
+        <p style="color: rgb(6, 100, 40); font-size: larger;"><b><label style="color: red;">Predict: </label> {{pred}}</b></p>
+
+    </div>
+</body>
+</html>

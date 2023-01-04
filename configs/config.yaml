@@ -1,0 +1,18 @@
+# It contains all the configs required in the project
+
+url_source: 'https://drive.google.com/file/d/1Nj-aY4C2gEVdFcTuHBRY3OehDPeaJAbx/view?usp=share_link'
+path_source: 'https://drive.google.com/uc?export=download&id='
+artifacts:
+  ARTIFACTS_DIR: artifacts
+  GET_DATA_DIR: data_dir
+  GET_DATA_FILE: data.csv
+  PROCESS_LOCAL_DIR: process_local_dir
+  SPLIT_DATA_DIR: split_data_dir
+  TRAIN: train.csv
+  TEST: test.csv
+  TRAIN_NEW: train_new.csv
+  TEST_NEW: test_new.csv
+  MODEL_DIR: model_dir
+  MODEL_NAME: model.bin
+
+scores: scores.json

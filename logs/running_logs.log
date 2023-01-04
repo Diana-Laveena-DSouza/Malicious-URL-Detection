@@ -1,0 +1,158 @@
+[2023-01-04 13:29:53,475: INFO: step_01_collect_data]: 
+********************
+[2023-01-04 13:29:53,475: INFO: step_01_collect_data]: >>>>> stage GET DATA started <<<<<
+[2023-01-04 13:29:53,477: INFO: common]: yaml file: configs/config.yaml loaded successfully
+[2023-01-04 13:29:56,971: INFO: common]: created directory at: artifacts/data_dir
+[2023-01-04 13:29:58,647: INFO: step_01_collect_data]: process data is saved at: artifacts/data_dir/data.csv
+[2023-01-04 13:29:58,663: INFO: step_01_collect_data]: >>>>> stage GET DATA completed!<<<<<
+
+[2023-01-04 13:29:59,691: INFO: step_02_train_test_split]: 
+********************
+[2023-01-04 13:29:59,691: INFO: step_02_train_test_split]: >>>>> stage TRAIN TEST SPLIT started <<<<<
+[2023-01-04 13:29:59,695: INFO: common]: yaml file: configs/config.yaml loaded successfully
+[2023-01-04 13:29:59,697: INFO: common]: yaml file: params.yaml loaded successfully
+[2023-01-04 13:29:59,697: INFO: common]: created directory at: artifacts/data_dir
+[2023-01-04 13:30:01,232: INFO: step_02_train_test_split]: splitting of data in training and test files at test_size: 0.01
+[2023-01-04 13:30:01,232: INFO: step_02_train_test_split]: Train Size: (626182, 2), Val Size: (6326, 2)
+[2023-01-04 13:30:01,232: INFO: common]: created directory at: artifacts/split_data_dir
+[2023-01-04 13:30:02,538: INFO: step_02_train_test_split]: train data is saved at: artifacts/split_data_dir/train.csv and test data is saved at: artifacts/split_data_dir/test.csv
+[2023-01-04 13:30:02,590: INFO: step_02_train_test_split]: >>>>> stage TRAIN TEST SPLIT completed!<<<<<
+
+[2023-01-04 13:30:04,213: INFO: step_03_processed_data]: 
+********************
+[2023-01-04 13:30:04,213: INFO: step_03_processed_data]: >>>>> stage PROCESS DATA started <<<<<
+[2023-01-04 13:30:04,215: INFO: common]: yaml file: configs/config.yaml loaded successfully
+[2023-01-04 13:30:04,215: INFO: common]: created directory at: artifacts/split_data_dir
+[2023-01-04 13:30:06,975: INFO: step_03_processed_data]: vocabulary list: [('e', 2331862), ('o', 2051033), ('a', 1818619), ('i', 1708318), ('w', 1650857), ('.', 1648472), ('t', 1626817), ('n', 1455628), ('c', 1438540), ('/', 1428340), ('r', 1326250), ('s', 1325892), ('m', 1311323), ('l', 1147238), ('p', 943007), ('d', 910604), ('-', 723284), ('h', 706228), ('u', 631784), ('g', 544763)]
+[2023-01-04 13:30:16,965: INFO: step_03_processed_data]: First five rows in train data:                                                  url  result
+0  [w, w, w, ., e, n, ., w, i, <OOV>, i, p, e, d,...       0
+1  [w, w, w, ., m, a, s, s, e, <OOV>, <OOV>, e, r...       1
+2  [w, w, w, ., h, e, n, r, i, -, i, <OOV>, ., c,...       0
+3  [w, w, w, ., <OOV>, a, m, a, m, o, m, o, <OOV>...       0
+4  [m, i, t, s, u, i, -, <OOV>, <OOV>, u, <OOV>, ...       1
+[2023-01-04 13:30:16,990: INFO: step_03_processed_data]: Checking missing values in train data: url       0
+result    0
+dtype: int64
+[2023-01-04 13:30:16,992: INFO: step_03_processed_data]: Checking missing values in train data: url       0
+result    0
+dtype: int64
+[2023-01-04 13:30:16,995: INFO: step_03_processed_data]: Label counts in train data: 1    313103
+0    313079
+Name: result, dtype: int64
+[2023-01-04 13:30:23,760: INFO: step_03_processed_data]: First five rows in train data:                                                  url  result
+0  [5, 5, 5, 6, 1, 8, 6, 5, 4, 21, 4, 15, 1, 16, ...       0
+1  [5, 5, 5, 6, 13, 3, 12, 12, 1, 21, 21, 1, 11, ...       1
+2  [5, 5, 5, 6, 18, 1, 8, 11, 4, 17, 4, 21, 6, 9,...       0
+3  [5, 5, 5, 6, 21, 3, 13, 3, 13, 2, 13, 2, 21, 3...       0
+4  [13, 4, 7, 12, 19, 4, 17, 21, 21, 19, 21, 19, ...       1
+[2023-01-04 13:30:23,761: INFO: common]: created directory at: artifacts/process_local_dir
+[2023-01-04 13:31:20,455: INFO: step_03_processed_data]: train data is saved at: artifacts/process_local_dir/train_new.csv and test data is saved at: artifacts/process_local_dir/test_new.csv
+[2023-01-04 13:31:23,719: INFO: step_03_processed_data]: >>>>> stage PROCESS DATA completed!<<<<<
+
+[2023-01-04 13:31:27,978: INFO: step_04_train_evaluate_model]: 
+********************
+[2023-01-04 13:31:27,978: INFO: step_04_train_evaluate_model]: >>>>> stage TRAINING AND EVALUATION started <<<<<
+[2023-01-04 13:31:27,980: INFO: common]: yaml file: configs/config.yaml loaded successfully
+[2023-01-04 13:31:27,981: INFO: common]: yaml file: params.yaml loaded successfully
+[2023-01-04 13:31:27,982: INFO: common]: created directory at: artifacts/process_local_dir
+[2023-01-04 13:31:47,569: INFO: common]: created directory at: artifacts/model_dir
+[2023-01-04 13:31:47,570: INFO: step_04_train_evaluate_model]: Data in the DataLoader
+[2023-01-04 13:31:47,572: INFO: step_04_train_evaluate_model]: {'token_id': tensor([[5, 5, 5,  ..., 0, 0, 0],
+        [5, 5, 5,  ..., 0, 0, 0],
+        [5, 5, 5,  ..., 0, 0, 0],
+        ...,
+        [5, 5, 5,  ..., 0, 0, 0],
+        [5, 5, 5,  ..., 0, 0, 0],
+        [5, 5, 5,  ..., 0, 0, 0]], dtype=torch.int32), 'labels': tensor([0., 1., 0., 0., 1., 1., 1., 1., 1., 1., 1., 1., 0., 1., 0., 0., 1., 0.,
+        0., 1., 0., 1., 0., 0., 1., 0., 0., 0., 0., 0., 1., 0.])}
+[2023-01-04 13:31:49,042: INFO: step_04_train_evaluate_model]: Model: TransformerModel(
+  (embedding): Embedding(256, 256)
+  (positional_encoding): PositionalEncoding(
+    (dropout): Dropout(p=0.1, inplace=False)
+  )
+  (encoder): TransformerEncoder(
+    (layers): ModuleList(
+      (0): TransformerEncoderLayer(
+        (self_attn): MultiheadAttention(
+          (out_proj): NonDynamicallyQuantizableLinear(in_features=256, out_features=256, bias=True)
+        )
+        (linear1): Linear(in_features=256, out_features=128, bias=True)
+        (dropout): Dropout(p=0.01, inplace=False)
+        (linear2): Linear(in_features=128, out_features=256, bias=True)
+        (norm1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+        (norm2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+        (dropout1): Dropout(p=0.01, inplace=False)
+        (dropout2): Dropout(p=0.01, inplace=False)
+      )
+      (1): TransformerEncoderLayer(
+        (self_attn): MultiheadAttention(
+          (out_proj): NonDynamicallyQuantizableLinear(in_features=256, out_features=256, bias=True)
+        )
+        (linear1): Linear(in_features=256, out_features=128, bias=True)
+        (dropout): Dropout(p=0.01, inplace=False)
+        (linear2): Linear(in_features=128, out_features=256, bias=True)
+        (norm1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+        (norm2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+        (dropout1): Dropout(p=0.01, inplace=False)
+        (dropout2): Dropout(p=0.01, inplace=False)
+      )
+      (2): TransformerEncoderLayer(
+        (self_attn): MultiheadAttention(
+          (out_proj): NonDynamicallyQuantizableLinear(in_features=256, out_features=256, bias=True)
+        )
+        (linear1): Linear(in_features=256, out_features=128, bias=True)
+        (dropout): Dropout(p=0.01, inplace=False)
+        (linear2): Linear(in_features=128, out_features=256, bias=True)
+        (norm1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+        (norm2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+        (dropout1): Dropout(p=0.01, inplace=False)
+        (dropout2): Dropout(p=0.01, inplace=False)
+      )
+      (3): TransformerEncoderLayer(
+        (self_attn): MultiheadAttention(
+          (out_proj): NonDynamicallyQuantizableLinear(in_features=256, out_features=256, bias=True)
+        )
+        (linear1): Linear(in_features=256, out_features=128, bias=True)
+        (dropout): Dropout(p=0.01, inplace=False)
+        (linear2): Linear(in_features=128, out_features=256, bias=True)
+        (norm1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+        (norm2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+        (dropout1): Dropout(p=0.01, inplace=False)
+        (dropout2): Dropout(p=0.01, inplace=False)
+      )
+      (4): TransformerEncoderLayer(
+        (self_attn): MultiheadAttention(
+          (out_proj): NonDynamicallyQuantizableLinear(in_features=256, out_features=256, bias=True)
+        )
+        (linear1): Linear(in_features=256, out_features=128, bias=True)
+        (dropout): Dropout(p=0.01, inplace=False)
+        (linear2): Linear(in_features=128, out_features=256, bias=True)
+        (norm1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+        (norm2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+        (dropout1): Dropout(p=0.01, inplace=False)
+        (dropout2): Dropout(p=0.01, inplace=False)
+      )
+      (5): TransformerEncoderLayer(
+        (self_attn): MultiheadAttention(
+          (out_proj): NonDynamicallyQuantizableLinear(in_features=256, out_features=256, bias=True)
+        )
+        (linear1): Linear(in_features=256, out_features=128, bias=True)
+        (dropout): Dropout(p=0.01, inplace=False)
+        (linear2): Linear(in_features=128, out_features=256, bias=True)
+        (norm1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+        (norm2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+        (dropout1): Dropout(p=0.01, inplace=False)
+        (dropout2): Dropout(p=0.01, inplace=False)
+      )
+    )
+  )
+  (classifier): Linear(in_features=256, out_features=2, bias=True)
+)
+[2023-01-04 13:51:22,424: INFO: step_04_train_evaluate_model]: Epoch: 1, Train_loss: 0.3517564471293829, Train_acc: 85.0360157222471, Val_loss: 0.39805198902106464, Val_acc: 82.23767383059418
+[2023-01-04 14:10:55,171: INFO: step_04_train_evaluate_model]: Epoch: 2, Train_loss: 0.2990305773274989, Train_acc: 87.19546859829322, Val_loss: 0.34998580780440725, Val_acc: 84.43426042983565
+[2023-01-04 14:30:25,156: INFO: step_04_train_evaluate_model]: Epoch: 3, Train_loss: 0.29422512709655846, Train_acc: 87.39859599366345, Val_loss: 0.3379645771470613, Val_acc: 84.73978087061124
+[2023-01-04 14:49:54,067: INFO: step_04_train_evaluate_model]: Epoch: 4, Train_loss: 0.2911165598168839, Train_acc: 87.559724564362, Val_loss: 0.3464796168578956, Val_acc: 83.8758954959633
+[2023-01-04 15:09:18,537: INFO: step_04_train_evaluate_model]: Epoch: 5, Train_loss: 0.289089159843943, Train_acc: 87.65724274793432, Val_loss: 0.3416729233640937, Val_acc: 84.59228824273072
+[2023-01-04 15:09:18,538: INFO: common]: json file saved at: scores.json
+[2023-01-04 15:09:23,150: INFO: step_04_train_evaluate_model]: >>>>> stage TRAINING AND EVALUATION completed!<<<<<
+
