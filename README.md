@@ -27,9 +27,9 @@ ________________________________________________________________________________
 
 # ✔DVC Report
 ______________________________________________________________________________________________________________________________________________________________
-https://studio.iterative.ai/user/Diana-Laveena-DSouza/projects/Malicious-URL-Detection-c5jqarihnf
+• https://studio.iterative.ai/user/Diana-Laveena-DSouza/projects/Malicious-URL-Detection-c5jqarihnf
 
-# Predition
+# Prediction
 ______________________________________________________________________________________________________________________________________________________________
 
 # Contributors 👩
